@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Component } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 
@@ -11,6 +12,7 @@ export class AppComponent {
   tasks = [];
   isDoneValue =false ;
   url = "http://localhost:3000/tasks/";
+  item = {};
 
   constructor(private http : HttpClient){
   }
@@ -28,12 +30,12 @@ export class AppComponent {
   });
  } )
   }
-  isDone(id) {
-    this.isDoneValue = !this.isDoneValue;
-    this.http.put(`${this.url}${id}`,
-    {title : this.title, isDone : this.isDoneValue}).subscribe((data) => {
+  async isDone(task) {
+    console.log(task);
+    this.http.put(`${this.url}${task.id}`,
+    {title : task.title , isDone : !task.isDone}).subscribe((data) => {
       this.tasks.filter(t => {
-        if (t.id === id) {
+        if (t.id === task.id) {
           t.isDone = !t.isDone;
         }
       });

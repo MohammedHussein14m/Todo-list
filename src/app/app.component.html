@@ -1,11 +1,11 @@
 <div id="myDIV" class="header">
   <h2>My To Do List</h2>
-  <input type="text" id="myInput" placeholder="Title..." [(ngModel)] = "title">
-  <span (click) = "onClick()" class="addBtn">Add</span>
+  <input type="text" id="myInput" (keyup.enter) = "onClick()" placeholder="Title..." [(ngModel)] = "title">
+  <span (click) = "onClick()"  class="addBtn">Add</span>
 </div>
 
 <ul>
-<li [class.checked] = "task.isDone" (click) = "isDone(task.id)" *ngFor="let task of tasks"> {{task.title}}
+<li [class.checked] = "task.isDone" (click) = "isDone(task)" *ngFor="let task of tasks"> {{task.title}}
   <span (click) = "remove(task.id)" class="close">x</span> </li>
 </ul>
 
